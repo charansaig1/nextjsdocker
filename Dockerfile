@@ -9,6 +9,10 @@ WORKDIR /usr/src/app
 COPY package.json package-lock.json ./
 RUN npm install --legacy-peer-deps
 
+# Install dependencies (including jest-environment-jsdom)
+RUN npm install
+RUN npm install --save-dev jest-environment-jsdom
+
 # Copy the rest of the source files.
 COPY . .
 
@@ -19,11 +23,9 @@ ENV PORT_DOCKER=${BUILD_PORT}
 # Stage for running tests
 FROM base as test
 
-# Install testing dependencies
-RUN npm install --save-dev jest @testing-library/react @testing-library/jest-dom
-
 # Run Jest tests
 RUN npx jest
+
 
 # Final stage - Production build
 FROM base as production

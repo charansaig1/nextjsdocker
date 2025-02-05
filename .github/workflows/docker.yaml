@@ -25,6 +25,10 @@ jobs:
           username: ${{ vars.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: Install npm dependencies
+        run: |
+          npm install --legacy-peer-deps
+
       - name: Build Docker image with build arguments
         run: docker build --build-arg BUILD_PORT=${{ vars.PORT_DOCKER }} -t nextjsapp:test .
 

@@ -7,7 +7,7 @@ WORKDIR /usr/src/app
 
 # Copy package files and install dependencies.
 COPY package.json package-lock.json ./
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 # Copy the rest of the source files.
 COPY . .
@@ -23,7 +23,7 @@ FROM base as test
 RUN npm install --save-dev jest @testing-library/react @testing-library/jest-dom
 
 # Run Jest tests
-RUN npx test
+RUN npx jest
 
 # Final stage - Production build
 FROM base as production

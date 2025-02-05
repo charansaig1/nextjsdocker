@@ -24,7 +24,7 @@ FROM base as test
 RUN npm install --save-dev jest @testing-library/react @testing-library/jest-dom
 
 # Run Jest tests
-RUN npx jest
+RUN npx test
 
 # Final stage - Production build
 FROM base as production

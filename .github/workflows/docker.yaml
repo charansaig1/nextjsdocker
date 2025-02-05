@@ -42,8 +42,5 @@ jobs:
         if: success()
         run: docker push ${{ vars.DOCKER_USERNAME }}/nextjsapp:${{ github.sha }}
 
-      - name: Print SMS variable
-        run: echo "SMS Message: ${{ vars.SMS }}"
-
-- name: Run Docker Container
-  run: docker run -d -p ${{ vars.PORT_DOCKER }}:3000 --name dockertest nextjsapp:${{ github.sha }}
+      - name: Run Docker Container
+        run: docker run -d -p ${{ vars.PORT_DOCKER }}:3000 --name dockertest nextjsapp:${{ github.sha }}
